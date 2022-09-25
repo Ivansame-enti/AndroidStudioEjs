@@ -7,7 +7,7 @@ open class CelestialBody(val name: String, val distanceToEarth: Double, val posi
         // S’encarrega d’inicialitzar la classe cada vegada que es crea una instància
     }
 
-    fun printName() {
+    open fun printName() {
         println("$name");
     }
 
