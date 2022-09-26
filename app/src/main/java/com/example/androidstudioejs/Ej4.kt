@@ -36,6 +36,26 @@ fun filterByIndex(list: List<Any>, indexs: List<Int?>): List<Any>{
     return l
 }
 
+fun cut(list: List<Any>, ini: Int = 0, end: Int =  list.size): List<Any>{
+    var l: List<Any> = listOf()
+    var inicial = ini
+    var final = end
+
+    if(ini>=end) return l
+
+    if(ini<0) inicial=0
+    if(end>list.size) final=list.size
+
+    for(i in inicial until final+1){
+        try {
+            l += list[i]
+        }catch (e: ArrayIndexOutOfBoundsException) {
+            break
+        }
+    }
+    return l
+}
+
 fun main() {
     //Control + barra de comentar con codigo subrayado -> lo comenta
 
@@ -52,9 +72,40 @@ fun main() {
         print("${l[i]}, ")
     }
     println()
+    println()
     /*****/
 
     /**Ej3**/
+    var list: List<Any>
+    list = cut(listOf("a", "b", "c", "d"))
 
+    for(i in 0 until list.size){
+        print("${list[i]}, ")
+    }
+    println()
+
+    list = cut(listOf("a", "b", "c", "d"), 1, 3)
+    for(i in 0 until list.size){
+        print("${list[i]}, ")
+    }
+    println()
+
+    list = cut(listOf("a", "b", "c", "d"),end=3)
+    for(i in 0 until list.size){
+        print("${list[i]}, ")
+    }
+    println()
+
+    list = cut(listOf("a", "b", "c", "d"),ini=3)
+    for(i in 0 until list.size){
+        print("${list[i]}, ")
+    }
+    println()
+
+    list = cut(listOf("a", "b", "c", "d"),-1,10)
+    for(i in 0 until list.size){
+        print("${list[i]}, ")
+    }
+    println()
     /*****/
 }
