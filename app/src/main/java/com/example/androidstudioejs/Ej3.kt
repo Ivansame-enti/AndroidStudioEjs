@@ -10,14 +10,14 @@ fun findTheFarthest(celestialBodies: List<CelestialBody>): CelestialBody{
     return aux
 }
 
-//fun filterByGalaxy(stars: List<Star?>, galaxy: Galaxy): List<Star>{
-//    val size = stars.size
-//    val list : List<Star>
-//    for(i in 0 until size){
-//        if(stars[i]?.belongsTo == galaxy) list+=stars[i]
-//    }
-//    return list
-//}
+fun filterByGalaxy(stars: List<Star?>, galaxy: Galaxy): List<Star>{
+    var aux = ArrayList<Star>()
+
+    for(element in stars){
+        if(element?.belongsTo == galaxy) aux.add(element) //Si es null, no entra
+    }
+    return aux
+}
 
 fun main() {
     //Control + barra de comentar con codigo subrayado -> lo comenta
@@ -30,7 +30,7 @@ fun main() {
 
     /**Ej3**/
     val bh = BlackHole("Agujero 1", 5.2, 14.6, true, 10.0, 50.0)
-    val radius = bh.calculateSchwarzschildRadius();
+    val radius: Double? = bh.calculateSchwarzschildRadius();
     println("$radius")
     println()
     /*****/
@@ -59,8 +59,13 @@ fun main() {
     val star4 = Star("Estrella 4", 32.2, 78.6, true, 58.3, 120.5, galaxy)
     /*****/
 
-    /**Ej7**/
+    /**Ej8**/
     val starList = listOf<Star?>(star, star2, star3, star4)
-    //val starListOnGalaxy =filterByGalaxy(starList, galaxy)
+    val starListOnGalaxy = filterByGalaxy(starList, galaxy)
+
+    for(i in 0 until starListOnGalaxy.size){
+        print("${starListOnGalaxy[i].name}, ")
+    }
+    println()
     /*****/
 }
