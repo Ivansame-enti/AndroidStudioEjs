@@ -1,5 +1,6 @@
 package com.example.androidstudioejs
 
+import kotlin.math.log2
 import kotlin.math.pow
 
 import kotlin.math.sqrt
@@ -21,9 +22,9 @@ fun productOfPairs(list: List<Int>): Double {
 }
 
 fun powersOf2(limit: Double): List<Double>{
-    val intPart = Math.sqrt(limit).toInt()
+    val intPart = log2(limit).toInt()
 
-    val list = 1..intPart-1
+    val list = 0..intPart
 
     return list.mapIndexed { i, it ->
         2.0.pow(i.toDouble())
@@ -31,12 +32,36 @@ fun powersOf2(limit: Double): List<Double>{
 
 }
 
-fun equals(l1: List<Int>, l2: List<Int>): Boolean{
-    l1.forEach({ it ->
-        l2.forEach({ it2 ->
-            if(it != it2) return false
-        })
+fun findInsert(orderedList: List<Int>, newNumber: Int): Int{
+    var aux: Int = -1
+
+    orderedList.forEachIndexed{ i, elem ->
+        if(newNumber <= elem && aux == -1) aux=i
+    }
+
+    if(aux == -1) aux = orderedList.size
+
+    return aux
+
+}
+
+fun <E> equals(l1: List<E>, l2: List<E>): Boolean{
+    if(l1.size != l2.size) return false
+
+    l1.forEachIndexed({ index, element ->
+        if(element != l2[index]) return false
     })
+
+    return true
+}
+
+fun similar(l1: List<Int>, l2: List<Int>): Boolean{
+    l2.forEach(){
+        e2 ->
+        if(!l1.any {e2 == it }){
+            return false
+        }
+    }
     return true
 }
 
@@ -46,6 +71,10 @@ fun sumLists(l1: List<Int>, l2: List<Int>): List<Int>{
     }
 
     return d
+}
+
+fun anonymousMathOperation(a: Int, b: Int, operation: (Int, Int) -> Double): Double{
+    return operation(a, b)
 }
 
 fun main() {
@@ -75,7 +104,8 @@ fun main() {
     /*****/
 
     /**Ej4**/
-
+    val num = findInsert(listOf(1,2,3,6), 4)
+    println(num)
     println()
     /*****/
 
@@ -85,7 +115,7 @@ fun main() {
     /*****/
 
     /**Ej6**/
-    //println(equals(listOf(1, 2, 3), listOf(1, 2, 3)))
+    println(similar(listOf(1, 2, 2), listOf(1, 2)))
     println()
     /*****/
 
@@ -97,5 +127,12 @@ fun main() {
     println()
     println()
     /*****/
+
+    /**Ej8**/
+    println(anonymousMathOperation (5, 3, ) {i, j -> i.toDouble().pow(j)})
+    println(anonymousMathOperation (5, 3, ) {i, j -> (i+j).toDouble()})
+    println(anonymousMathOperation (5, 3, ) {i, j -> (i-j).toDouble()})
+    println()
+    /********/
 
 }
